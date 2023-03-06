@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-export default function AddCard(): JSX.Element {
+export default function AdCard(): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="place-card__mark">

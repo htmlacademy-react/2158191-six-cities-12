@@ -1,11 +1,11 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 
 type AppScreenProps = {
-  addCount: number;
+  adCount: number;
 }
 
-export default function App({addCount}: AppScreenProps): JSX.Element {
+export default function App({adCount}: AppScreenProps): JSX.Element {
   return (
-    <MainScreen addCount={addCount} />
+    <MainScreen adCount={adCount} />
   );
 }
