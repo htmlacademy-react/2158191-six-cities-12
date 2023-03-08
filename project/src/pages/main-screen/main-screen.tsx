@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import AdCard from '../../components/adCard/adCard';
+import AdCard from '../../components/ad-card/ad-card';
 
 type MainScreenProps = {
   adCount: number;
