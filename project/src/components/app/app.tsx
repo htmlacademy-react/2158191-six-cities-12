@@ -1,5 +1,11 @@
-function App(): JSX.Element {
-  return <p>Hello, world!</p>;
+import MainScreen from '../../pages/main-screen/main-screen';
+
+type AppScreenProps = {
+  adCount: number;
 }
 
-export default App;
+export default function App({adCount}: AppScreenProps): JSX.Element {
+  return (
+    <MainScreen adCount={adCount} />
+  );
+}
