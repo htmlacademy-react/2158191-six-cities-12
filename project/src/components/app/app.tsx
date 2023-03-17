@@ -6,18 +6,21 @@ import OfferScreen from '../../pages/offer-screen/offer-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
+import {Offer} from '../../types/offer';
+import {Review} from '../../types/review';
 
 type AppScreenProps = {
-  adCount: number;
+  offers: Offer[];
+  reviews: Review[];
 }
 
-export default function App({adCount}: AppScreenProps): JSX.Element {
+export default function App({offers, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element = {<MainScreen adCount={adCount} />}
+          element = {<MainScreen offers={offers} />}
         />
         <Route
           path={AppRoute.Favorites}
@@ -25,7 +28,7 @@ export default function App({adCount}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <FavoritesScreen />
+              <FavoritesScreen offers={offers}/>
             </PrivateRoute>
           }
         />
@@ -34,10 +37,10 @@ export default function App({adCount}: AppScreenProps): JSX.Element {
           element = {<LoginScreen />}
         />
         <Route path={AppRoute.Offer}>
-          <Route path = ':id' element = {<OfferScreen />} />
+          <Route path = ':id' element = {<OfferScreen offers={offers} reviews={reviews}/>} />
         </Route>
         <Route
-          path="*"
+          path='*'
           element={<NotFoundScreen />}
         />
       </Routes>

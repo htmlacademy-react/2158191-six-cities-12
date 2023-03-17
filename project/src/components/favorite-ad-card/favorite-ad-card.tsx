@@ -1,29 +1,24 @@
 import { Offer } from '../../types/offer';
-import { Link } from 'react-router-dom';
 import { getRatingStarsStyle } from '../../utils';
 
-type AdCardProps = {
+type FavoriteAdCardProps = {
     offer: Offer;
-    onAdCardMouseOver({id}:{id:number}): void;
 }
 
-export default function AdCard({offer, onAdCardMouseOver}: AdCardProps): JSX.Element {
+export default function FavoriteAdCard({offer}: FavoriteAdCardProps): JSX.Element {
   const {isFavorite, isPremium, previewImage, price, title, type, rating} = offer;
 
   return (
-    <article className="cities__card place-card" id ={offer.id.toString()} onMouseOver={(evt)=> {
-      const target = evt.currentTarget as HTMLElement;
-      onAdCardMouseOver({id: +target.id});}}
-    >
+    <article className="favorites__card place-card">
       <div className="place-card__mark">
         <span>{isPremium ? 'Premium' : ''}</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="/">
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place"/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -43,7 +38,7 @@ export default function AdCard({offer, onAdCardMouseOver}: AdCardProps): JSX.Ele
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{title}</Link>
+          <a href="/">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

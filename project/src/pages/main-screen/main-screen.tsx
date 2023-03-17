@@ -1,11 +1,12 @@
-import AdCard from '../../components/ad-card/ad-card';
+import AdCardList from '../../components/ad-card-list/ad-card-list';
 import Header from '../../components/header/header';
+import {Offer} from '../../types/offer';
 
 type MainScreenProps = {
-  adCount: number;
+   offers: Offer[];
 }
 
-export default function MainScreen({adCount}: MainScreenProps): JSX.Element {
+export default function MainScreen({offers}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -52,7 +53,7 @@ export default function MainScreen({adCount}: MainScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{adCount} places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -69,11 +70,8 @@ export default function MainScreen({adCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <AdCard/>
-                <AdCard/>
-                <AdCard/>
-                <AdCard/>
-                <AdCard/>
+                <AdCardList offers={offers} />
+
               </div>
             </section>
             <div className="cities__right-section">
