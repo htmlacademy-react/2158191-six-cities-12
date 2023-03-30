@@ -1,43 +1,49 @@
 export enum AppRoute {
-    Favorites = '/favorites',
-    Root = '/',
-    Login = '/login',
-    Offer = '/offer'
+  Favorites = '/favorites',
+  Root = '/',
+  Login = '/login',
+  Offer = '/offer'
 }
 export enum CitiesName {
-    AMSTERDAM = 'Amsterdam',
-    COLOGNE = 'Cologne',
-    PARIS = 'Paris',
-    DUSSELDORF = 'Dusseldorf',
-    BRUSSELS = 'Brussels',
-    HAMBURG = 'Hamburg',
+  AMSTERDAM = 'Amsterdam',
+  COLOGNE = 'Cologne',
+  PARIS = 'Paris',
+  DUSSELDORF = 'Dusseldorf',
+  BRUSSELS = 'Brussels',
+  HAMBURG = 'Hamburg',
 }
 
 export enum AuthorizationStatus {
-    Auth = 'AUTH',
-    NoAuth = 'NO_AUTH',
-    Unknown = 'UNKNOWN',
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export enum SortingTypes {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
 }
 
 export enum Actions {
-  PICK_CITY = 'PICK_CITY',
-  FILTER_OFFERS = 'FILTER_OFFERS',
+PICK_CITY = 'PICK_CITY',
+FILTER_OFFERS = 'FILTER_OFFERS'
 }
-
 
 export const RATING_STARS_STYLE_KOEF = 20;
 
 export enum AdClasses {
-    ArticlePropertyAdClass = 'near-places__card place-card',
-    ArticleMainAdClass = 'cities__card place-card',
-    ImageWrapperPropertyAdClass = 'near-places__image-wrapper place-card__image-wrapper',
-    ImageWrapperMainAdClass = 'cities__image-wrapper place-card__image-wrapper',
-  }
+  ArticlePropertyAdClass = 'near-places__card place-card',
+  ArticleMainAdClass = 'cities__card place-card',
+  ImageWrapperPropertyAdClass = 'near-places__image-wrapper place-card__image-wrapper',
+  ImageWrapperMainAdClass = 'cities__image-wrapper place-card__image-wrapper',
+}
 
 export enum MapClasses {
-    SectionMainMapClass = 'cities__map map',
-    SectionPropertyMapClass = 'property__map map',
-  }
+  SectionMainMapClass = 'cities__map map',
+  SectionPropertyMapClass = 'property__map map',
+}
 
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
