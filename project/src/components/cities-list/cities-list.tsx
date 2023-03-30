@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { CitiesName } from '../../const';
+import { CitiesName, SortingTypes } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { filterOffers, pickCity } from '../../store/action';
 
 type CitiesListProps = {
-  currentCity: string | null;
+    setSortingType(value: string): void;
+    currentCity: string | null;
 }
 
-
-export default function CitiesList({currentCity}: CitiesListProps): JSX.Element {
+export default function CitiesList({setSortingType, currentCity}: CitiesListProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
@@ -19,6 +19,7 @@ export default function CitiesList({currentCity}: CitiesListProps): JSX.Element 
       }
       dispatch(pickCity(target.textContent));
       dispatch(filterOffers());
+      setSortingType(SortingTypes.Popular);
     }}
     >
       <li className="locations__item">

@@ -46,9 +46,14 @@ export default function Map(props: MapProps): JSX.Element {
         )
           .addTo(map);
       });
-      map.flyTo([offers[0].city.location.latitude, offers[0].city.location.longitude], offers[0].city.location.zoom);
     }
   }, [map, offers, activeOfferId]);
+
+  useEffect(() => {
+    if (map) {
+      map.flyTo([offers[0].city.location.latitude, offers[0].city.location.longitude], offers[0].city.location.zoom);
+    }
+  }, [map, offers]);
 
   return (
     <section className={isMainScreen ? MapClasses.SectionMainMapClass : MapClasses.SectionPropertyMapClass} ref={mapRef}></section>
