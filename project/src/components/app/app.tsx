@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, SPINNER_COLOR} from '../../const';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
@@ -8,9 +8,15 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import {Review} from '../../types/review';
 import { useAppSelector } from '../../hooks';
-import { LoadingScreen } from '../../pages/loading-screen/loading-screen';
 import { HistoryRouter } from '../history-route/history-route';
 import { browserHistory } from '../../browser-history';
+import ClipLoader from 'react-spinners/ClipLoader';
+import {CSSProperties } from 'react';
+
+const override: CSSProperties = {
+  display: 'block',
+  margin: 'auto',
+};
 
 type AppScreenProps = {
   reviews: Review[];
@@ -22,7 +28,13 @@ export default function App({reviews}: AppScreenProps): JSX.Element {
 
   if (isOffersDataLoading) {
     return (
-      <LoadingScreen />
+      <ClipLoader
+        color={SPINNER_COLOR}
+        loading={isOffersDataLoading}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+      />
     );
   }
 
