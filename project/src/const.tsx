@@ -14,6 +14,14 @@ export enum APIRoute {
   NearbyOffers = '/nearby'
 }
 
+export enum SlicesName {
+  Page = 'PAGE',
+  User = 'USER',
+  OffersData = 'OFFERS_DATA',
+  CurrentOfferData = 'CURRENT_OFFER_DATA',
+  UserReview = 'USER_REVIEW',
+}
+
 export enum CitiesName {
   AMSTERDAM = 'Amsterdam',
   COLOGNE = 'Cologne',
@@ -71,7 +79,5 @@ export enum MapClasses {
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
-
-export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const SPINNER_COLOR = '#7777FF';
