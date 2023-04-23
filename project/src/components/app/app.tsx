@@ -17,13 +17,8 @@ const override: CSSProperties = {
   margin: 'auto',
 };
 
-
 export default function App(): JSX.Element {
-  const offers = useAppSelector((state)=>state.filteredOffers);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const offerComments = useAppSelector((state) => state.currentOffer.comments);
-  const nearbyOffers = useAppSelector((state) => state.currentOffer.nearbyOffers);
-  const offerInfo = useAppSelector((state) => state.currentOffer.offerInfo);
   const isCurrenOfferDataLoading = useAppSelector((state) => state.isCurrentOfferDataLoading);
 
   if (isOffersDataLoading || isCurrenOfferDataLoading) {
@@ -43,13 +38,13 @@ export default function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element = {<MainScreen offers={offers} />}
+          element = {<MainScreen />}
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute>
-              <FavoritesScreen offers={offers}/>
+              <FavoritesScreen />
             </PrivateRoute>
           }
         />
@@ -58,7 +53,7 @@ export default function App(): JSX.Element {
           element = {<LoginScreen />}
         />
         <Route path={AppRoute.Offer}>
-          <Route path = ':id' element = {<OfferScreen offer={offerInfo} reviews={offerComments} nearbyOffers={nearbyOffers}/>} />
+          <Route path = ':id' element = {<OfferScreen />} />
         </Route>
         <Route
           path='*'
