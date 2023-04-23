@@ -14,6 +14,14 @@ export enum APIRoute {
   NearbyOffers = '/nearby'
 }
 
+export enum SlicesName {
+  Page = 'PAGE',
+  User = 'USER',
+  OffersData = 'OFFERS_DATA',
+  CurrentOfferData = 'CURRENT_OFFER_DATA',
+  UserReview = 'USER_REVIEW',
+}
+
 export enum CitiesName {
   AMSTERDAM = 'Amsterdam',
   COLOGNE = 'Cologne',
@@ -38,6 +46,7 @@ export enum SortingTypes {
 
 export enum Actions {
 PICK_CITY = 'PICK_CITY',
+SET_SORT_TYPE = 'SET_SORT_TYPE',
 FILTER_OFFERS = 'FILTER_OFFERS',
 LOAD_OFFERS = 'LOAD_OFFERS',
 SET_STATUS_OFFERS_DATA_LOADING = 'SET_STATUS_OFFERS_DATA_LOADING',
@@ -50,6 +59,7 @@ LOAD_NEARBY_OFFERS = 'LOAD_NEARBY_OFFERS',
 LOAD_OFFER_COMMENTS = 'LOAD_OFFER_COMMENTS',
 SET_CURRENT_OFFER_DATA_LOADING = 'SET_CURRENT_OFFER_DATA_LOADING',
 SET_COMMENT_DATA_SENDING = 'SET_COMMENT_DATA_SENDING',
+SET_CURRENT_OFFER_ID = 'SET_CURRENT_OFFER_ID',
 }
 
 export const RATING_STARS_STYLE_KOEF = 20;
@@ -69,7 +79,5 @@ export enum MapClasses {
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
-
-export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const SPINNER_COLOR = '#7777FF';

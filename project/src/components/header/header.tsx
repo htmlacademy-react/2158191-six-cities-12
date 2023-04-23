@@ -1,12 +1,14 @@
+import React from 'react';
 import {Link} from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getUserEmail, getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
 
-export default function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+function Header(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userEmail = useAppSelector(getUserEmail);
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector((state) => state.userEmail);
 
   return (
     <header className="header">
@@ -18,8 +20,7 @@ export default function Header(): JSX.Element {
             </Link>
           </div>
           <nav className="header__nav">
-            {
-              authorizationStatus === AuthorizationStatus.Auth &&
+            {authorizationStatus === AuthorizationStatus.Auth &&
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile" to="/favorites">
@@ -37,10 +38,8 @@ export default function Header(): JSX.Element {
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>
-              </ul>
-            }
-            {
-              authorizationStatus !== AuthorizationStatus.Auth &&
+              </ul>}
+            {authorizationStatus !== AuthorizationStatus.Auth &&
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <Link className="header__nav-link header__nav-link--profile" to="/login">
@@ -49,11 +48,12 @@ export default function Header(): JSX.Element {
                     <span className="header__login">Sign in</span>
                   </Link>
                 </li>
-              </ul>
-            }
+              </ul>}
           </nav>
         </div>
       </div>
     </header>
   );
 }
+
+export default React.memo(Header);
