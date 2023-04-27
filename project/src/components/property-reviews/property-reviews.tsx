@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks';
-import { getRatingStarsStyle } from '../../utils';
+import { getRatingStarsStyle, humanizeReleaseDate } from '../../utils';
 import { getComments } from '../../store/current-offer-data/selectors';
 
 export default function PropertyReviews(): JSX.Element {
@@ -9,7 +9,7 @@ export default function PropertyReviews(): JSX.Element {
     <>
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.map(({rating, id, user, comment}) => (
+        {reviews.map(({rating, id, user, comment, date}) => (
           <li className="reviews__item" key={id}>
             <div className="reviews__user user">
               <div className="reviews__avatar-wrapper user__avatar-wrapper">
@@ -29,7 +29,7 @@ export default function PropertyReviews(): JSX.Element {
               <p className="reviews__text">
                 {comment}
               </p>
-              <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+              <time className="reviews__time" dateTime={date}>{humanizeReleaseDate(date)}</time>
             </div>
           </li>
         ))}

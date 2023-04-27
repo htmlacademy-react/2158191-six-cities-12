@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { setOfferFavoriteStatusAction } from '../../store/api-actions';
+import { fetchOfferInfoAction, setOfferFavoriteStatusAction } from '../../store/api-actions';
+import { setCurrentOfferId } from '../../store/page-events/page-events';
 import { Offer } from '../../types/offer';
 import { getRatingStarsStyle } from '../../utils';
 
@@ -16,14 +18,16 @@ export default function FavoriteAdCard({offer}: FavoriteAdCardProps): JSX.Elemen
   };
 
   return (
-    <article className="favorites__card place-card">
+    <article className="favorites__card place-card" onMouseOver={()=> {
+      dispatch(setCurrentOfferId(id));}}
+    >
       <div className="place-card__mark">
         <span>{isPremium ? 'Premium' : ''}</span>
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <Link to="#">
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place"/>
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -45,7 +49,12 @@ export default function FavoriteAdCard({offer}: FavoriteAdCardProps): JSX.Elemen
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">{title}</a>
+          <Link to={`/offer/${offer.id}`} onClick={() => {
+            dispatch(fetchOfferInfoAction(id.toString()));
+          }}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

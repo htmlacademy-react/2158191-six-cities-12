@@ -4,7 +4,6 @@ import { Review } from './review';
 
 export type AuthorizationUserProcess = {
   authorizationStatus: string;
-  userEmail: string;
 }
 
 export type OffersData = {

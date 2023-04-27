@@ -2,13 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getUserEmail } from '../../services/user-email';
 import { fetchFavoriteOffersAction, logoutAction } from '../../store/api-actions';
-import { getUserEmail, getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
+import { getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
 import { getFavoriteOffers } from '../../store/favorite-offers-data/selectors';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const userEmail = useAppSelector(getUserEmail);
+  const userEmail = getUserEmail();
   const dispatch = useAppDispatch();
   const favoriteOffers = useAppSelector(getFavoriteOffers);
 
