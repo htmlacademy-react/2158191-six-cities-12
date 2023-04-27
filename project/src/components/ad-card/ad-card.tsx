@@ -28,9 +28,8 @@ export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element 
   };
 
   return (
-    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} id ={id.toString()} onMouseOver={isMainScreen ? (evt)=> {
-      const target = evt.currentTarget as HTMLElement;
-      dispatch(setCurrentOfferId(+target.id));} : undefined}
+    <article className={isMainScreen ? AdClasses.ArticleMainAdClass : AdClasses.ArticlePropertyAdClass} onMouseOver={(evt)=> {
+      dispatch(setCurrentOfferId(id));}}
     >
       {
         isMainScreen &&
@@ -39,9 +38,9 @@ export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element 
         </div>
       }
       <div className={isMainScreen ? AdClasses.ImageWrapperMainAdClass : AdClasses.ImageWrapperPropertyAdClass}>
-        <a href="/">
+        <Link to="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

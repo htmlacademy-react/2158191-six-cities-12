@@ -5,18 +5,34 @@ import { getRatingStarsStyle } from '../../utils';
 import AdCardList from '../../components/ad-card-list/ad-card-list';
 import Map from '../../components/map/map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCurrentOfferDataLoadingStatus, getNearbyOffers, getOfferInfo } from '../../store/current-offer-data/selectors';
 import { getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
+import { browserHistory } from '../../browser-history';
+import { AppRoute } from '../../const';
+import { setOfferFavoriteStatusAction } from '../../store/api-actions';
+import { useState } from 'react';
 
 export default function OfferScreen(): JSX.Element {
   const offer = useAppSelector(getOfferInfo);
   const isCurrenOfferDataLoading = useAppSelector(getCurrentOfferDataLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
+  const dispatch = useAppDispatch();
+  const [isFavoriteOffer, setFavoriteOffer] = useState<boolean | null>(offer?.isFavorite ? offer.isFavorite : null);
 
   if (offer && !isCurrenOfferDataLoading) {
-    const {isFavorite, isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms} = offer;
+    const {isPremium, description, goods, host, images, rating, maxAdults, price, title, type, bedrooms, id} = offer;
+    const favoriteStatus = `${+!isFavoriteOffer}`;
+    const handleFavoriteButtonClick = () => {
+      if(authorizationStatus !== 'AUTH') {
+        browserHistory.push(AppRoute.Login);
+
+        return;
+      }
+      setFavoriteOffer((prevState) => !prevState);
+      dispatch(setOfferFavoriteStatusAction({id, favoriteStatus}));
+    };
 
     return (
       <div className="page">
@@ -42,7 +58,7 @@ export default function OfferScreen(): JSX.Element {
                 </div>
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{title}</h1>
-                  <button className={`property__bookmark-button button ${isFavorite ? 'property__bookmark-button--active' : ''}`} type="button">
+                  <button className={`property__bookmark-button button ${isFavoriteOffer ? 'property__bookmark-button--active' : ''}`} onClick={handleFavoriteButtonClick} type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>

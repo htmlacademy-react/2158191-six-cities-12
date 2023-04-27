@@ -34,7 +34,7 @@ export default function Map(props: MapProps): JSX.Element {
   const map = useMap(mapRef, offers[0]);
 
   useEffect(() => {
-    if (map) {
+    if (map && isMainScreen) {
       map.eachLayer((layer) => {
         if (layer.options.pane === 'markerPane') { //Проверка: явлется ли слой маркером, чтобы затем удалить только маркеры
           map.removeLayer(layer);
@@ -55,7 +55,33 @@ export default function Map(props: MapProps): JSX.Element {
           .addTo(map);
       });
     }
-  }, [map, offers, activeOfferId]);
+  }, [map, offers, activeOfferId, isMainScreen]);
+
+  useEffect(() => {
+    if (map && !isMainScreen) {
+      map.eachLayer((layer) => {
+        if (layer.options.pane === 'markerPane') { //Проверка: явлется ли слой маркером, чтобы затем удалить только маркеры
+          map.removeLayer(layer);
+        }
+      });
+
+      offers.forEach((offer: Offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
+        });
+
+        marker.setIcon(
+          activeOfferId !== undefined && offer.id === activeOfferId
+            ? currentCustomIcon
+            : defaultCustomIcon
+        )
+          .addTo(map);
+      });
+    }
+  // eslint-disable-next-line
+  }, [map, offers, isMainScreen]);
+
 
   useEffect(() => {
     if (map) {

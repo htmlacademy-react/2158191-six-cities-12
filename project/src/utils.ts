@@ -1,6 +1,7 @@
 import { RATING_STARS_STYLE_KOEF } from './const';
 import { Offer } from './types/offer';
 import { SortingTypes } from './const';
+import dayjs from 'dayjs';
 
 export function sortOffers(offers: Offer[], sortingType: string | null) {
   const sortedOffers = [...offers];
@@ -30,4 +31,10 @@ export function compareOffersPriceDown(offerA: Offer, offerB: Offer) {
 
 export function compareOffersRatingDown(offerA: Offer, offerB: Offer) {
   return offerB.rating - offerA.rating;
+}
+
+const RELEASE_DATE_FORMAT = 'MMMM YYYY';
+
+export function humanizeReleaseDate(releaseDate: string) {
+  return releaseDate ? dayjs(releaseDate).format(RELEASE_DATE_FORMAT) : '';
 }
