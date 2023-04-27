@@ -79,6 +79,7 @@ export default function Map(props: MapProps): JSX.Element {
           .addTo(map);
       });
     }
+  // eslint-disable-next-line
   }, [map, offers, isMainScreen]);
 
 
