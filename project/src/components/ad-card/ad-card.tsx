@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCurrentOfferId } from '../../store/page-events/page-events';
 import { browserHistory } from '../../browser-history';
 import { getAuthorizationStatus } from '../../store/authorization-user-process/selectors';
+import { useState } from 'react';
 
 type AdCardProps = {
     offer: Offer;
@@ -16,7 +17,8 @@ type AdCardProps = {
 export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element {
   const {isFavorite, isPremium, previewImage, price, title, type, rating, id} = offer;
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const favoriteStatus = `${+!isFavorite}`;
+  const [isFavoriteOffer, setFavoriteOffer] = useState<boolean>(isFavorite);
+  const favoriteStatus = `${+!isFavoriteOffer}`;
   const dispatch = useAppDispatch();
   const handleFavoriteButtonClick = () => {
     if(authorizationStatus !== 'AUTH') {
@@ -24,6 +26,7 @@ export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element 
 
       return;
     }
+    setFavoriteOffer((prevState) => !prevState);
     dispatch(setOfferFavoriteStatusAction({id, favoriteStatus}));
   };
 
@@ -48,7 +51,7 @@ export default function AdCard({offer, isMainScreen}: AdCardProps): JSX.Element 
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`} onClick={handleFavoriteButtonClick} type="button">
+          <button className={`place-card__bookmark-button ${isFavoriteOffer ? 'place-card__bookmark-button--active' : ''} button`} onClick={handleFavoriteButtonClick} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
